@@ -24,8 +24,15 @@ call plug#begin('~/.config/nvim/autoload/plugged')
 	Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 
-
+	
     Plug 'nvim-lua/popup.nvim'
 	Plug 'nvim-lua/plenary.nvim'
 	Plug 'nvim-telescope/telescope.nvim' 
+
+	Plug 'Pocco81/TrueZen.nvim'
+
+    "Plug 'glepnir/galaxyline.nvim' , {'branch': 'main'}
+
+    Plug 'kyazdani42/nvim-web-devicons' " lua
+    Plug 'ryanoasis/vim-devicons' " vimscript
 call plug#end()

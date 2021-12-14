@@ -33,7 +33,7 @@ bindsym $mod+Return exec kitty
 bindsym $mod+Shift+q kill
 
 # start program launcher
-bindsym $mod+d exec --no-startup-id dmenu_recency
+bindsym $mod+d exec --no-startup-id dmenu_run
 bindsym $mod+p exec --no-startup-id rofi -show drun -show-icons
 #bindsym $shift+l exec --no-startup-id rofi -show drun -show-icons
 
@@ -57,14 +57,17 @@ bindsym XF86AudioLowerVolume exec --no-startup-id pactl -- set-sink-volume @DEFA
 ################################################################################################
 
 # Screen brightness controls
-# bindsym XF86MonBrightnessUp exec "xbacklight -inc 10; notify-send 'brightness up'"
-# bindsym XF86MonBrightnessDown exec "xbacklight -dec 10; notify-send 'brightness down'"
+#bindsym XF86MonBrightnessUp exec "xbacklight -inc 10; notify-send 'brightness up'"
+#bindsym XF86MonBrightnessDown exec "xbacklight -dec 10; notify-send 'brightness down'"
+
+bindsym XF86MonBrightnessUp exec light -A 5
+bindsym XF86MonBrightnessDown exec light -U 5
 
 # Start Applications
 bindsym $mod+Ctrl+b exec terminal -e 'bmenu'
 bindsym $mod+F2 exec google-chrome-stable
 bindsym $mod+F1 exec google-chrome-stable --incognito
-bindsym $mod+F3 exec dolphin
+bindsym $mod+F3 exec pcmanfm
 # bindsym $mod+F3 exec ranger
 bindsym $mod+Shift+F3 exec pcmanfm_pkexec
 bindsym $mod+F5 exec terminal -e 'mocp'
@@ -286,6 +289,10 @@ exec --no-startup-id nm-applet
 exec --no-startup-id xfce4-power-manager
 exec --no-startup-id pamac-tray
 exec --no-startup-id clipit
+exec --no-startup-id xinput set-prop "ELAN1200:00 04F3:30E9 Touchpad" "libinput Tapping Enabled" 1
+exec --no-startup-id xinput set-prop "ELAN1200:00 04F3:30E9 Touchpad" "libinput Click Method Enabled" 0 1
+
+exec_always --no-startup-id picom
 # exec --no-startup-id blueman-applet
 # exec_always --no-startup-id sbxkb
 #exec --no-startup-id start_conky_maia
@@ -345,7 +352,7 @@ bindsym $mod+m polybar mode toggle
   client.placeholder      #000000 #0c0c0c #ffffff #000000 
 
 
-client.background     $term_background
+#client.background     $term_background
   
 #############################
 ### settings for i3-gaps: ###
