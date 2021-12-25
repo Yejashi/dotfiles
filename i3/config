@@ -8,8 +8,8 @@ set $mod Mod4
 # workspace_layout tabbed <stacking|tabbed>
 
 # Configure border style <normal|1pixel|pixel xx|none|pixel>
-default_border pixel 1
-default_floating_border normal
+default_border none
+default_floating_border none
 
 # Hide borders
 hide_edge_borders none
@@ -27,7 +27,7 @@ font xft:URWGothic-Book 11
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec kitty
+bindsym $mod+Return exec kitty --single-instance
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -60,14 +60,14 @@ bindsym XF86AudioLowerVolume exec --no-startup-id pactl -- set-sink-volume @DEFA
 #bindsym XF86MonBrightnessUp exec "xbacklight -inc 10; notify-send 'brightness up'"
 #bindsym XF86MonBrightnessDown exec "xbacklight -dec 10; notify-send 'brightness down'"
 
-bindsym XF86MonBrightnessUp exec light -A 5
-bindsym XF86MonBrightnessDown exec light -U 5
+#bindsym XF86MonBrightnessUp exec light -A 5
+#bindsym XF86MonBrightnessDown exec light -U 5
 
 # Start Applications
 bindsym $mod+Ctrl+b exec terminal -e 'bmenu'
 bindsym $mod+F2 exec google-chrome-stable
 bindsym $mod+F1 exec google-chrome-stable --incognito
-bindsym $mod+F3 exec pcmanfm
+bindsym $mod+F3 exec thunar
 # bindsym $mod+F3 exec ranger
 bindsym $mod+Shift+F3 exec pcmanfm_pkexec
 bindsym $mod+F5 exec terminal -e 'mocp'
@@ -80,7 +80,7 @@ bindsym $mod+Shift+Print --release exec --no-startup-id i3-scrot -s
 bindsym $mod+Shift+m exec xdg-open /usr/share/doc/manjaro/i3_help.pdf
 bindsym $mod+Ctrl+x --release exec --no-startup-id xkill
 
-# focus_follows_mouse no
+ focus_follows_mouse no
 
 # change focus
 bindsym $mod+h focus left
@@ -112,17 +112,14 @@ workspace_auto_back_and_forth yes
 bindsym $mod+Shift+a move container to workspace back_and_forth; workspace back_and_forth
 
 # split orientation
-bindsym $mod+b split h;exec notify-send 'tile horizontally'
-bindsym $mod+v split v;exec notify-send 'tile vertically'
+bindsym $mod+b split h
+bindsym $mod+v split v
 bindsym $mod+q split toggle
 
 # toggle fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
-bindsym $mod+s layout stacking
-bindsym $mod+w layout tabbed
-bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
@@ -137,11 +134,11 @@ bindsym $mod+Shift+s sticky toggle
 bindsym $mod+a focus parent
 
 # move the currently focused window to the scratchpad
-bindsym $mod+Shift+minus move scratchpad
+bindsym $mod+minus move scratchpad
 
 # Show the next scratchpad window or hide the focused scratchpad window.
 # If there are multiple scratchpad windows, this command cycles through them.
-#bindsym $mod+minus scratchpad show
+bindsym $mod+plus scratchpad show
 
 #navigate workspaces next / previous
 bindsym $mod+Ctrl+Right workspace next
@@ -283,7 +280,7 @@ bindsym $mod+9 exec --no-startup-id blurlock
 
 # Autostart applications
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-exec --no-startup-id nitrogen --restore; sleep 1; picom -b
+exec --no-startup-id nitrogen --restore
 #exec --no-startup-id manjaro-hello
 exec --no-startup-id nm-applet
 exec --no-startup-id xfce4-power-manager
@@ -292,7 +289,7 @@ exec --no-startup-id clipit
 exec --no-startup-id xinput set-prop "ELAN1200:00 04F3:30E9 Touchpad" "libinput Tapping Enabled" 1
 exec --no-startup-id xinput set-prop "ELAN1200:00 04F3:30E9 Touchpad" "libinput Click Method Enabled" 0 1
 
-exec_always --no-startup-id picom
+exec --no-startup-id picom
 # exec --no-startup-id blueman-applet
 # exec_always --no-startup-id sbxkb
 #exec --no-startup-id start_conky_maia
@@ -337,11 +334,35 @@ set_from_resource $term_color15    color15
 # hide/unhide i3status bar
 
 #polybar lauch script
-exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+#exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
 
+bar {
+	#i3bar_command i3bar
+	position top
+    
+    status_command ~/.config/bumblebee-status/bumblebee-status \
+ -t iceberg-dark-powerline \
+ -m  playerctl amixer cpu cpu2 date time brightness battery \
+ -p t = time.format="%I:%M %p"
 
-bindsym $mod+m polybar mode toggle
+
+    colors {
+        background #000000
+        statusline #000000
+        separator  #000000
+#                      border  backgr. text
+        focused_workspace  #232222 #232222 #FFFFFF
+        active_workspace   #232222 #232222 #FFFFFF
+        inactive_workspace #000000 #000000 #FFFFFF
+        binding_mode       #000000 #000000 #FFFFFF
+        urgent_workspace   #232222 #232222 #FFFFFF
+    }
+}
+
+
+#bindsym $mod+m polybar mode toggle
+bindsym $mod+m bar mode toggle
 
 # Theme colors
 # class                   border  backgr. text    indic.   child_border
