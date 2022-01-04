@@ -5,34 +5,26 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
   "autocmd VimEnter * PlugInstall
   "autocmd VimEnter * PlugInstall | source $MYVIMRC
 endif
-
 call plug#begin('~/.config/nvim/autoload/plugged')
-    Plug 'sheerun/vim-polyglot'
-    "Plug 'jiangmiao/auto-pairs'
-	Plug 'jremmen/vim-ripgrep'
-   
-	Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-	Plug 'junegunn/fzf.vim'
-	Plug 'tpope/vim-fugitive'
-	Plug 'vim-utils/vim-man'
-"	Plug 'lyuts/vim-rtags'
-	Plug 'kien/ctrlp.vim'
-	Plug 'preservim/nerdtree'
-"	Plug 'ycm-core/YouCompleteMe'
-	Plug 'airblade/vim-rooter'
-    Plug 'nvim-telescope/telescope-fzy-native.nvim'
-	Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    Plug 'neovim/nvim-lspconfig'
+    Plug 'hrsh7th/nvim-compe'
+    Plug 'vim-airline/vim-airline'
+    Plug 'vim-airline/vim-airline-themes'
+    Plug 'ryanoasis/vim-devicons'
+
+    Plug 'unblevable/quick-scope'
+
+    "Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': 'python3 -m chadtree deps'}
+    Plug 'romgrk/barbar.nvim'
+    Plug 'kyazdani42/nvim-web-devicons'
+    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+    Plug 'junegunn/fzf.vim'
+
+    Plug 'hrsh7th/vim-vsnip'
+    Plug 'hrsh7th/vim-vsnip-integ'
+    Plug 'WhoIsSethDaniel/toggle-lsp-diagnostics.nvim'
+
+    Plug 'kyazdani42/nvim-tree.lua'
 
 
-	
-    Plug 'nvim-lua/popup.nvim'
-	Plug 'nvim-lua/plenary.nvim'
-	Plug 'nvim-telescope/telescope.nvim' 
-
-	Plug 'Pocco81/TrueZen.nvim'
-
-    "Plug 'glepnir/galaxyline.nvim' , {'branch': 'main'}
-
-    Plug 'kyazdani42/nvim-web-devicons' " lua
-    Plug 'ryanoasis/vim-devicons' " vimscript
 call plug#end()

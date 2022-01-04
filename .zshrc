@@ -21,6 +21,7 @@ source ~/.oh-my-zsh/oh-my-zsh.sh
 
 alias ytp="youtube-viewer  --no-video-info --player=mpv"
 alias open="xdg-open &"
+alias v="nvim"
 
 export EDITOR=vim
 export VISUAL=vim
