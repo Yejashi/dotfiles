@@ -4,6 +4,8 @@ exec  --no-startup-id caps.sh
 # Set mod key (Mod1=<Alt>, Mod4=<Super>)
 set $mod Mod4
 
+exec --no-startup-id polybar example -r -s &
+
 # set default desktop layout (default is tiling)
 # workspace_layout tabbed <stacking|tabbed>
 
@@ -28,6 +30,7 @@ floating_modifier $mod
 
 # start a terminal
 bindsym $mod+Return exec kitty --single-instance
+bindsym $mod+Shift+Return exec alacritty
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -238,13 +241,13 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 bindsym $mod+0 mode "$mode_system"
 set $mode_system (l)ock, (e)xit, switch_(u)ser, (s)uspend, (h)ibernate, (r)eboot, (Shift+s)hutdown
 mode "$mode_system" {
-    bindsym l exec --no-startup-id i3exit lock, mode "default"
-    bindsym s exec --no-startup-id i3exit suspend, mode "default"
-    bindsym u exec --no-startup-id i3exit switch_user, mode "default"
+    bindsym l exec --no-startup-id xflock4, mode "default"
+    bindsym s exec --no-startup-id systemctl suspend , mode "default"
+    bindsym u exec --no-startup-id pkill -u $USER, mode "default"
     bindsym e exec --no-startup-id i3exit logout, mode "default"
     bindsym h exec --no-startup-id i3exit hibernate, mode "default"
-    bindsym r exec --no-startup-id i3exit reboot, mode "default"
-    bindsym Shift+s exec --no-startup-id i3exit shutdown, mode "default"
+    bindsym r exec --no-startup-id reboot, mode "default"
+    bindsym Shift+s exec --no-startup-id shutdown 0, mode "default"
 
     # exit system mode: "Enter" or "Escape"
     bindsym Return mode "default"
@@ -289,7 +292,7 @@ exec --no-startup-id clipit
 exec --no-startup-id xinput set-prop "ELAN1200:00 04F3:30E9 Touchpad" "libinput Tapping Enabled" 1
 exec --no-startup-id xinput set-prop "ELAN1200:00 04F3:30E9 Touchpad" "libinput Click Method Enabled" 0 1
 
-exec --no-startup-id picom
+exec_always --no-startup-id picom
 # exec --no-startup-id blueman-applet
 # exec_always --no-startup-id sbxkb
 #exec --no-startup-id start_conky_maia
@@ -338,31 +341,28 @@ set_from_resource $term_color15    color15
 
 
 bar {
-	#i3bar_command i3bar
-	position top
+	#position top
     
-    status_command ~/.config/bumblebee-status/bumblebee-status \
- -t iceberg-dark-powerline \
- -m  playerctl amixer cpu cpu2 date time brightness battery \
- -p t = time.format="%I:%M %p"
-
-
-    colors {
-        background #000000
-        statusline #000000
-        separator  #000000
-#                      border  backgr. text
-        focused_workspace  #232222 #232222 #FFFFFF
-        active_workspace   #232222 #232222 #FFFFFF
-        inactive_workspace #000000 #000000 #FFFFFF
-        binding_mode       #000000 #000000 #FFFFFF
-        urgent_workspace   #232222 #232222 #FFFFFF
-    }
+    #status_command polybar
+	i3bar_command $HOME/.config/polybar/tokyo/launch.sh
 }
+
+#   colors {
+#       background #000000
+#       statusline #000000
+#       separator  #000000
+#                      border  backgr. text
+#       focused_workspace  #232222 #232222 #FFFFFF
+#       active_workspace   #232222 #232222 #FFFFFF
+#       inactive_workspace #000000 #000000 #FFFFFF
+#       binding_mode       #000000 #000000 #FFFFFF
+#       urgent_workspace   #232222 #232222 #FFFFFF
+#   }
+#}
 
 
 #bindsym $mod+m polybar mode toggle
-bindsym $mod+m bar mode toggle
+#bindsym $mod+m bar mode toggle
 
 # Theme colors
 # class                   border  backgr. text    indic.   child_border
